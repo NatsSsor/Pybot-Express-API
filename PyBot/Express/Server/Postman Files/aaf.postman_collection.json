@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "f514984d-49d6-424f-bd3a-9dbb0d5b0058",
+		"name": "aaf",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Noot",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "haslock",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "filelocked",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/add/user?name=test&species=test&breed=test&age=0&colour=test",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"add",
+						"user"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						},
+						{
+							"key": "species",
+							"value": "test"
+						},
+						{
+							"key": "breed",
+							"value": "test"
+						},
+						{
+							"key": "age",
+							"value": "0"
+						},
+						{
+							"key": "colour",
+							"value": "test"
+						}
+					]
+				},
+				"description": "test"
+			},
+			"response": []
+		},
+		{
+			"name": "View Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/view/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"view",
+						"user"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add File",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Filename",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "Filesize",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "FileExt",
+							"value": ".png",
+							"type": "text"
+						},
+						{
+							"key": "Author",
+							"value": "Ross",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "July 23, 2018 03:24:00",
+							"type": "text"
+						},
+						{
+							"key": "FilesizePower",
+							"value": "KB",
+							"type": "text"
+						},
+						{
+							"key": "Tags",
+							"value": "TooDank,DankEnough",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/add/File",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"add",
+						"File"
+					]
+				},
+				"description": "Adding a file to the mongo db"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "5c63d8290a6d4a5e84b9046f",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "changed",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/update/User",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"update",
+						"User"
+					]
+				},
+				"description": "aaf-Update User"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "5c63da070ccb06717c05531d",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/delete/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"delete",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Files",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/view/file",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"view",
+						"file"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete File",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "",
+							"description": "Insert the Child Files Versions._id",
+							"type": "text"
+						},
+						{
+							"key": "parentid",
+							"value": "",
+							"description": "Insert the Parent Files _id",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/File/Delete",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"File",
+						"Delete"
+					]
+				},
+				"description": "Deletes a version from a file declaration"
+			},
+			"response": []
+		},
+		{
+			"name": "Update File",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "parentid",
+							"value": "",
+							"description": "Insert the files _id",
+							"type": "text"
+						},
+						{
+							"key": "innerid",
+							"value": "",
+							"description": "insert the versions Versions._id to update",
+							"type": "text"
+						},
+						{
+							"key": "Author",
+							"value": "Update",
+							"description": "updates the author",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/File/Update",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"File",
+						"Update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

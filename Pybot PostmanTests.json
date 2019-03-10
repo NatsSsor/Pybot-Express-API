@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "a76b9359-cd0e-4209-9c55-ad9d201543c4",
+		"name": "Programming Things",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Init",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Init",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/View",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"View"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Activate",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Deactivate",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Deactivate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Present",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Present",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Present"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Nathan",
+							"type": "text"
+						},
+						{
+							"key": "IsPresent",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Create",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Name",
+							"value": "Jake",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Update?Name=Nathan",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Update"
+					],
+					"query": [
+						{
+							"key": "Name",
+							"value": "Nathan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/Delete?Name=Jake",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"Delete"
+					],
+					"query": [
+						{
+							"key": "Name",
+							"value": "Jake"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IsPresent",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/IsPresent?Name=Ross",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"IsPresent"
+					],
+					"query": [
+						{
+							"key": "Name",
+							"value": "Ross"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HasLeft",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3001/intheroom/HasLeft?Name=Ross",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"intheroom",
+						"HasLeft"
+					],
+					"query": [
+						{
+							"key": "Name",
+							"value": "Ross"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
