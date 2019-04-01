@@ -274,10 +274,24 @@ router.get("/isActivated", function(req, res, next) {
     .then(result => {
       console.log(result);
       console.log(result[0].isActivated);
-      res.json({
-        confirmation: "Success",
-        data: result[0].isActivated
-      });
+      console.
+    
+      //res.status.json()
+      if(result[0].isActivated)
+      {
+        res.json({
+          confirmation: "Success",
+          data: result[0].isActivated
+        });
+      } else {
+        res.status(500).json({
+          confirmation: "Success",
+          data: result[0].isActivated
+        });
+      }
+    
+
+      
     })
     .catch(err =>
       res.json({
