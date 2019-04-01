@@ -160,7 +160,7 @@ router.get("/Present", function(req, res, next) {
       return result[0].isActivated;
     })
   ) {
-    res.json({
+    res.status(204).json({
       confirmation: "Error",
       reason:
         "API is currently deactivated, please re-enable if you wish to see who is in the room"
