@@ -158,7 +158,7 @@ router.get("/Present", function(req, res, next) {
   var isactivated = activated.find().then(result => {
     return result[0].isActivated;
   });
-
+  console.log(isactivated);
   if (isactivated) {
     res.status(204).json({
       confirmation: "Error",
