@@ -32,7 +32,7 @@ mongoose.connect(connstring, options, (err, database) => {
   if (err) return console.log(err);
   else console.log("connected to mongo successfully");
 });
-const InitialData = { activated: true };
+const InitialData = { isActivated: true };
 router.post("/Init", function(req, res, next) {
   console.log(InitialData);
   activated
