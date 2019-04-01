@@ -155,14 +155,12 @@ router.delete("/Delete", function(req, res, next) {
 
 //Endpoint to get all present people and return an error if deactivated
 router.get("/Present", function(req, res, next) {
-  if (
-    !activated
-      .find()
-      .then(result => {})
-      .then(result => {
-        return result[0].isActivated;
-      })
-  ) {
+  
+    var isactivated = await activated.find().then(result => {
+      return result[0].isActivated;
+    })
+  
+if(isactivated){
     res.status(204).json({
       confirmation: "Error",
       reason:
