@@ -232,22 +232,56 @@ router.put("/HasLeft", function(req, res, next) {
 
 //Endpoint to disable deactivated mode
 router.put("/Activate", function(req, res, next) {
-  Deactivated = false;
-
-  res.json({
-    confirmation: "Success",
-    data: Deactivated
-  });
+  activated
+    .findOneAndUpdate("", { isActivated: true })
+    .then(
+      res.json({
+        confirmation: "Success",
+        data: true
+      })
+    )
+    .catch(err => {
+      res.json({
+        confirmation: "Error",
+        error: err.message
+      });
+    });
 });
 
 //Endpoint to enable deactivated mode
 router.put("/Deactivate", function(req, res, next) {
-  Deactivated = true;
+  activated
+    .findOneAndUpdate("", { isActivated: false })
+    .then(
+      res.json({
+        confirmation: "Success",
+        data: false
+      })
+    )
+    .catch(err => {
+      res.json({
+        confirmation: "Error",
+        error: err.message
+      });
+    });
+});
 
-  res.json({
-    confirmation: "Success",
-    data: Deactivated
-  });
+//endpoint to get whether or not the room function is active
+router.get("/isActivated", function(req, res, next) {
+  activated
+    .find()
+    .then(result => {
+      res.json({
+        confirmation: "Success",
+        data: result.activated
+      });
+    })
+    .catch(err =>
+      res.json({
+        confirmation: "Error",
+        error: err.message
+      })
+    );
 });
 
 module.exports = router;
