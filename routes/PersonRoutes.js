@@ -273,6 +273,7 @@ router.get("/isActivated", function(req, res, next) {
     .find()
     .then(result => {
       console.log(result);
+      console.log(result.isActivated);
       res.json({
         confirmation: "Success",
         data: result.isActivated
