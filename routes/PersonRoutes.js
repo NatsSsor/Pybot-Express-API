@@ -157,7 +157,7 @@ router.delete("/Delete", function(req, res, next) {
 router.get("/Present", function(req, res, next) {
   if (
     !activated.find().then(result => {
-      return result.activated;
+      return result.isActivated;
     })
   ) {
     res.json({
@@ -234,12 +234,13 @@ router.put("/HasLeft", function(req, res, next) {
 router.put("/Activate", function(req, res, next) {
   activated
     .findOneAndUpdate("", { isActivated: true })
-    .then(
+    .then(res => {
+      console.log(res);
       res.json({
         confirmation: "Success",
         data: true
-      })
-    )
+      });
+    })
     .catch(err => {
       res.json({
         confirmation: "Error",
@@ -274,7 +275,7 @@ router.get("/isActivated", function(req, res, next) {
       console.log(result);
       res.json({
         confirmation: "Success",
-        data: result.activated
+        data: result.isActivated
       });
     })
     .catch(err =>
