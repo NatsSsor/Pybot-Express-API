@@ -155,20 +155,21 @@ router.delete("/Delete", function(req, res, next) {
 
 //Endpoint to get all present people and return an error if deactivated
 router.get("/Present", function(req, res, next) {
-  console.log(
-    activated.find().then(result => {
-      return result[0].isActivated;
-    })
-  );
-
-  /*  {
+  if (
+    !activated
+      .find()
+      .then(result => {})
+      .then(result => {
+        return result[0].isActivated;
+      })
+  ) {
     res.status(204).json({
       confirmation: "Error",
       reason:
         "API is currently deactivated, please re-enable if you wish to see who is in the room"
     });
     return;
-  } */
+  }
 
   person
     .find({ IsPresent: true })
