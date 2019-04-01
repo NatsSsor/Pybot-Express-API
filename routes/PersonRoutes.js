@@ -1,4 +1,5 @@
 const person = require("../Models/Person");
+const activated = require("../Models/Activated");
 const express = require("express");
 const router = express.Router();
 let Deactivated = false;
@@ -154,7 +155,11 @@ router.delete("/Delete", function(req, res, next) {
 
 //Endpoint to get all present people and return an error if deactivated
 router.get("/Present", function(req, res, next) {
-  if (Deactivated) {
+  if (
+    !activated.find().then(result => {
+      return result.activated;
+    })
+  ) {
     res.json({
       confirmation: "Error",
       reason:

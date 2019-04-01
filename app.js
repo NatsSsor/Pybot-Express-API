@@ -53,7 +53,7 @@ var viewRouter = require("./routes/view");
 var updateRouter = require("./routes/update");
 var deleteRouter = require("./routes/delete"); */
 var peopleRouter = require("./routes/PersonRoutes");
-
+var activatedRouter = require("./routes/ActivatedRoutes");
 var app = express();
 console.log();
 app.use(logger("dev"));
@@ -70,6 +70,7 @@ app.use("/update", updateRouter);
 app.use("/delete", deleteRouter); */
 
 app.use("/intheroom", peopleRouter);
+app.use("/activated", activatedRouter);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
