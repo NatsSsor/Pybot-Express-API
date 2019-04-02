@@ -56,15 +56,26 @@ var peopleRouter = require("./routes/PersonRoutes");
 var activatedRouter = require("./routes/ActivatedRoutes");
 var app = express();
 console.log();
-app.options("/*", (req, res, next) => {
+// app.options("/*", (req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Authorization, Content-Length, X-Requested-With"
+//   );
+//   res.sendStatus(200);
+// });
+
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   res.header(
     "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, Content-Length, X-Requested-With"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.sendStatus(200);
+  next();
 });
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
