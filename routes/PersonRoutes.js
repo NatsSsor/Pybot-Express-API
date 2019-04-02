@@ -21,6 +21,10 @@ const options = {
   connectTimeoutMS: 4000000
 };
 
+async function getactivated() {
+  return await activated.find().exec();
+}
+
 // Connect to the db
 /* MongoClient.connect(connstring2, function(err, db) {
   if (err) throw err;
@@ -155,23 +159,23 @@ router.delete("/Delete", function(req, res, next) {
 
 //Endpoint to get all present people and return an error if deactivated
 router.get("/Present", function(req, res, next) {
-  var isactivated = activated.find().then(result => {
-    return result[0].isActivated;
-  });
-  console.log(isactivated);
+  getactivated().then(result => {
+    console.log(result);
+    console.log(result[0].isActivated);
+    console.log(result.isActivated);
+    console.log(result[0]);
 
-  if (
-    !isactivated.then(result => {
-      return result.isActivated;
-    })
-  ) {
-    res.status(204).json({
-      confirmation: "Error",
-      reason:
-        "API is currently deactivated, please re-enable if you wish to see who is in the room"
-    });
-    return;
-  }
+    //res.status.json()
+    if (!result[0].isActivated) {
+      res.status(204).json({
+        confirmation: "Error",
+        reason:
+          "API is currently deactivated, please re-enable if you wish to see who is in the room"
+      });
+      return;
+    }
+    console.log(isactivated);
+  });
 
   person
     .find({ IsPresent: true })
@@ -271,10 +275,6 @@ router.put("/Deactivate", function(req, res, next) {
       });
     });
 });
-
-async function getactivated() {
-  return await activated.find().exec();
-}
 
 //endpoint to get whether or not the room function is active
 router.get("/isActivated", function(req, res, next) {
