@@ -275,7 +275,7 @@ router.put("/Deactivate", function(req, res, next) {
 async function getactivated()
 {
   return activated
-  .find();
+  .find().exec();
 }
 
 //endpoint to get whether or not the room function is active
