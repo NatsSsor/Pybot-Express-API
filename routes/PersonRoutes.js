@@ -243,7 +243,7 @@ router.put("/HasLeft", function(req, res, next) {
 router.put("/Activate", function(req, res, next) {
   activated
     .findOneAndUpdate("", { isActivated: true })
-    .then(res => {
+    .then(resp => {
       console.log(res);
       res.json({
         confirmation: "Success",
