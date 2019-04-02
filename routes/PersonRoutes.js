@@ -280,7 +280,7 @@ async function getactivated()
 
 //endpoint to get whether or not the room function is active
 router.get("/isActivated", function(req, res, next) {
-  await this.getactivated()
+  await getactivated()
     .then(result => {
       console.log(result);
       console.log(result[0].isActivated);
