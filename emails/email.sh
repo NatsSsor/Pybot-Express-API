@@ -1,0 +1,1 @@
+echo "Hi Ross,\n You are recieving this email as your PyBot device has registered an unknown person in view of your camera." | mail -s "Potential intruder Ross, act now!" rossstangmod@gmail.com

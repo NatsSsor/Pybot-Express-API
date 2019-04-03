@@ -4,6 +4,7 @@ const activated = require("../Models/Activated");
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
+const shell = require("shelljs");
 
 const name = "Ross";
 
@@ -25,7 +26,7 @@ const options = {
 };
 
 function sendEmail() {
-  const Email = require("email-templates");
+  /* const Email = require("email-templates");
 
   var transporter = nodemailer.createTransport({
     service: "gmail",
@@ -55,7 +56,9 @@ function sendEmail() {
       }
     })
     .then(console.log)
-    .catch(console.error);
+    .catch(console.error); */
+
+  shell.exec("../emails/email.sh");
 }
 
 async function getactivated() {
@@ -346,43 +349,42 @@ router.get("/isActivated", function(req, res, next) {
     );
 });
 
-
 //endpoint to show current video frame
-router.put("/setFrame", function(req,res,next) {
+router.put("/setFrame", function(req, res, next) {
   let base64string = req.body.baseString;
 
   var options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-  frame.findOneAndUpdate({}, { BaseString: base64string }, options)
-  .then(
-    res.json({
-      confirmation: "Success",
-      data: false
+  frame
+    .findOneAndUpdate({}, { BaseString: base64string }, options)
+    .then(
+      res.json({
+        confirmation: "Success",
+        data: false
+      })
+    )
+    .catch(err => {
+      res.json({
+        confirmation: "Error",
+        error: err.message
+      });
+    });
+});
+
+router.get("/getFrame", function(req, res, next) {
+  frame
+    .findOne({}, (err, result) => {
+      res.json({
+        confirmation: "Success",
+        data: result.BaseString
+      });
     })
-  )
-  .catch(err => {
-    res.json({
-      confirmation: "Error",
-      error: err.message
+    .catch(err => {
+      res.json({
+        confirmation: "Error",
+        error: err.message
+      });
     });
-  });
-
-})
-
-router.get("/getFrame", function(req,res,next) {
-  frame.findOne({}, (err, result) => {
-    res.json({
-      confirmation: "Success",
-      data: result.BaseString
-    });
-  })
-  .catch(err => {
-    res.json({
-      confirmation: "Error",
-      error: err.message
-    });
-  });
-})
-
+});
 
 module.exports = router;
