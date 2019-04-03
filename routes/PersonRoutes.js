@@ -30,7 +30,7 @@ function sendEmail() {
     service: "gmail",
     auth: {
       user: "programmingthingsbot@gmail.com",
-      pass: "Shanesnose"
+      pass: "shanesnose"
     }
   });
 
