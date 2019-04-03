@@ -21,25 +21,6 @@ const options = {
   connectTimeoutMS: 4000000
 };
 
-passport.use(
-  new Strategy(
-    {
-      clientID: process.env["1956842057777167"],
-      clientSecret: process.env["65a671b731fd29e8bf8378ddb4172e7e"],
-      callbackURL: "/return"
-    },
-    function(accessToken, refreshToken, profile, cb) {
-      // In this example, the user's Facebook profile is supplied as the user
-      // record.  In a production-quality application, the Facebook profile should
-      // be associated with a user record in the application's database, which
-      // allows for account linking and authentication with other identity
-      // providers.
-      console.log(accessToken);
-      return cb(null, profile);
-    }
-  )
-);
-
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
