@@ -377,16 +377,14 @@ router.get("/getFrame", function(req,res,next) {
 
     getactivated()
     .then(activate => {
-      if (result[0].isActivated) {
+      if (activate[0].isActivated) {
         res.json({
           confirmation: "Success",
           data: result.BaseString
         });
       }
       else {
-        res.status(204).json({
-          confirmation: "Error"
-        });
+        res.status(204).send("success");
       }
     })
     .catch(err => {
