@@ -244,7 +244,6 @@ router.put("/Activate", function(req, res, next) {
   activated
     .findOneAndUpdate("", { isActivated: true })
     .then(resp => {
-      console.log(res);
       res.json({
         confirmation: "Success",
         data: true
