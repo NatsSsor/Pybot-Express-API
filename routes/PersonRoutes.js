@@ -388,12 +388,14 @@ router.get("/getFrame", function(req,res,next) {
         });
       }
     })
-  })
-  .catch(err => {
-    res.json({
-      confirmation: "Error",
-      error: err.message
+    .catch(err => {
+      res.json({
+        confirmation: "Error",
+        error: err.message
+      })
     });
+    
+  })
 });
 
 module.exports = router;
