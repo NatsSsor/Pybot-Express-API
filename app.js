@@ -103,4 +103,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get("/", function(req, res) {
+  res.status("200").send("Service is up");
+});
+
 module.exports = app;
