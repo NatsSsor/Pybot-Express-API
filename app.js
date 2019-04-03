@@ -24,8 +24,8 @@ const options = {
 passport.use(
   new Strategy(
     {
-      clientID: process.env["FACEBOOK_CLIENT_ID"],
-      clientSecret: process.env["FACEBOOK_CLIENT_SECRET"],
+      clientID: process.env["1956842057777167"],
+      clientSecret: process.env["65a671b731fd29e8bf8378ddb4172e7e"],
       callbackURL: "/return"
     },
     function(accessToken, refreshToken, profile, cb) {
