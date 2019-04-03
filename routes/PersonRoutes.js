@@ -21,6 +21,34 @@ const options = {
   connectTimeoutMS: 4000000
 };
 
+function sendEmail() {
+  const Email = require("email-templates");
+
+  const email = new Email({
+    message: {
+      from: "rossstangmod@gmail.com"
+    },
+    // uncomment below to send emails in development/test env:
+    // send: true
+    transport: {
+      jsonTransport: true
+    }
+  });
+
+  email
+    .send({
+      template: "mars",
+      message: {
+        to: "rossstangmod@gmail.com"
+      },
+      locals: {
+        name: "Elon"
+      }
+    })
+    .then(console.log)
+    .catch(console.error);
+}
+
 async function getactivated() {
   return await activated.find().exec();
 }
@@ -278,6 +306,7 @@ router.put("/Deactivate", function(req, res, next) {
 
 //endpoint to get whether or not the room function is active
 router.get("/isActivated", function(req, res, next) {
+  sendEmail();
   getactivated()
     .then(result => {
       console.log(result);
@@ -305,34 +334,5 @@ router.get("/isActivated", function(req, res, next) {
       })
     );
 });
-
-sendEmail();
-{
-  const Email = require("email-templates");
-
-  const email = new Email({
-    message: {
-      from: "rossstangmod@gmail.com"
-    },
-    // uncomment below to send emails in development/test env:
-    // send: true
-    transport: {
-      jsonTransport: true
-    }
-  });
-
-  email
-    .send({
-      template: "mars",
-      message: {
-        to: "rossstangmod@gmail.com"
-      },
-      locals: {
-        name: "Elon"
-      }
-    })
-    .then(console.log)
-    .catch(console.error);
-}
 
 module.exports = router;
