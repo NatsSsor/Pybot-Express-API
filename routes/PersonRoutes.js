@@ -371,10 +371,21 @@ router.put("/setFrame", function(req,res,next) {
 
 router.get("/getFrame", function(req,res,next) {
   frame.findOne({}, (err, result) => {
-    res.json({
-      confirmation: "Success",
-      data: result.BaseString
-    });
+
+    getactivated()
+    .then(activate => {
+      if (result[0].isActivated) {
+        res.json({
+          confirmation: "Success",
+          data: result.BaseString
+        });
+      }
+      else {
+        res.status(204).json({
+          confirmation: "Error"
+        });
+      }
+    })
   })
   .catch(err => {
     res.json({
