@@ -1,4 +1,5 @@
 const person = require("../Models/Person");
+const frame = require("../Models/Frame");
 const activated = require("../Models/Activated");
 const express = require("express");
 const router = express.Router();
@@ -344,5 +345,44 @@ router.get("/isActivated", function(req, res, next) {
       })
     );
 });
+
+
+//endpoint to show current video frame
+router.put("/setFrame", function(req,res,next) {
+  let base64string = req.body.baseString;
+
+  var options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  frame.findOneAndUpdate({}, { BaseString: base64string }, options)
+  .then(
+    res.json({
+      confirmation: "Success",
+      data: false
+    })
+  )
+  .catch(err => {
+    res.json({
+      confirmation: "Error",
+      error: err.message
+    });
+  });
+
+})
+
+router.get("/getFrame", function(req,res,next) {
+  frame.findOne({}, (err, result) => {
+    res.json({
+      confirmation: "Success",
+      data: result.BaseString
+    });
+  })
+  .catch(err => {
+    res.json({
+      confirmation: "Error",
+      error: err.message
+    });
+  });
+})
+
 
 module.exports = router;

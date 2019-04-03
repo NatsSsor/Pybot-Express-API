@@ -9,7 +9,8 @@ const options = {
   user: "pibotdb",
   pass: "password1!",
   useNewUrlParser: true,
-  connectTimeoutMS: 4000000
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 5000  
 };
 mongoose.connect(connstring, options, (err, database) => {
   if (err) return console.log(err);
