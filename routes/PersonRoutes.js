@@ -37,7 +37,7 @@ function sendEmail() {
 
   email
     .send({
-      template: "mars",
+      template: "intruder",
       message: {
         to: "rossstangmod@gmail.com"
       },
