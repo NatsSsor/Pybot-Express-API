@@ -5,6 +5,8 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const shell = require("shelljs");
+var jwt = require('jsonwebtoken');
+var config = require('../config/enviromentVariables');
 
 const name = "Ross";
 
@@ -396,5 +398,27 @@ router.get("/getFrame", function(req,res,next) {
     
   })
 });
+
+
+router.post("/login", function(req,res,next) {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  if (username === "admin" && password === "admin")
+  {
+      // create a token
+      var token = jwt.sign({
+        name: username,
+        pass: password 
+      }, config.secret, {
+        expiresIn: 1000000000000000086400 // expires in a very long time (Need so tests still work)
+      });
+      res.send(token);
+  }
+  else {
+    res.status(500).send("FAILED");
+  }
+
+})
 
 module.exports = router;
