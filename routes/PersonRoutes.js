@@ -173,24 +173,24 @@ router.get("/Present", function(req, res, next) {
           "API is currently deactivated, please re-enable if you wish to see who is in the room"
       });
       return;
+    } else {
+      person
+        .find({ IsPresent: true })
+        .then(users => {
+          res.json({
+            confirmation: "Success",
+            data: users
+          });
+        })
+        .catch(err => {
+          res.json({
+            confirmation: "Failed",
+            error: err.message
+          });
+        });
     }
     console.log(isactivated);
   });
-
-  person
-    .find({ IsPresent: true })
-    .then(users => {
-      res.json({
-        confirmation: "Success",
-        data: users
-      });
-    })
-    .catch(err => {
-      res.json({
-        confirmation: "Failed",
-        error: err.message
-      });
-    });
 });
 
 //register someone as present
