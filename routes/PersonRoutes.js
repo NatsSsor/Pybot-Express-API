@@ -317,7 +317,6 @@ router.put("/Deactivate", function(req, res, next) {
 
 //endpoint to get whether or not the room function is active
 router.get("/isActivated", function(req, res, next) {
-  sendEmail();
   getactivated()
     .then(result => {
       console.log(result);
