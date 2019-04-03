@@ -60,7 +60,7 @@ function sendEmail() {
     .then(console.log)
     .catch(console.error); */
 
-  shell.exec("../emails/email.sh");
+  shell.exec("./emails/email.sh");
 }
 
 async function getactivated() {
@@ -241,7 +241,9 @@ router.put("/IsPresent", function(req, res, next) {
   console.log(query);
 
   if (query.Name == "Unknown") {
-    console.log("Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. ")
+    console.log(
+      "Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. Hey, you're [some professional insult]. "
+    );
     sendEmail();
   }
   const present = { IsPresent: true };
@@ -374,29 +376,26 @@ router.put("/setFrame", function(req, res, next) {
     });
 });
 
-router.get("/getFrame", function(req,res,next) {
+router.get("/getFrame", function(req, res, next) {
   frame.findOne({}, (err, result) => {
-
     getactivated()
-    .then(activate => {
-      if (activate[0].isActivated) {
-        res.json({
-          confirmation: "Success",
-          data: result.BaseString
-        });
-      }
-      else {
-        res.status(204).send("success");
-      }
-    })
-    .catch(err => {
-      res.json({
-        confirmation: "Error",
-        error: err.message
+      .then(activate => {
+        if (activate[0].isActivated) {
+          res.json({
+            confirmation: "Success",
+            data: result.BaseString
+          });
+        } else {
+          res.status(204).send("success");
+        }
       })
-    });
-    
-  })
+      .catch(err => {
+        res.json({
+          confirmation: "Error",
+          error: err.message
+        });
+      });
+  });
 });
 
 
