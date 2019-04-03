@@ -82,6 +82,8 @@ var peopleRouter = require("./routes/PersonRoutes");
 var activatedRouter = require("./routes/ActivatedRoutes");
 var fbRouter = require("./routes/MessengerRoutes");
 var app = express();
+app.use(passport.initialize());
+app.use(passport.session());
 console.log();
 // app.options("/*", (req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
