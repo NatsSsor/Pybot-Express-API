@@ -199,6 +199,7 @@ router.put("/IsPresent", function(req, res, next) {
   console.log(query);
 
   const present = { IsPresent: true };
+
   person
     .findOneAndUpdate(query, present)
     .then(people => {
@@ -304,5 +305,34 @@ router.get("/isActivated", function(req, res, next) {
       })
     );
 });
+
+sendEmail();
+{
+  const Email = require("email-templates");
+
+  const email = new Email({
+    message: {
+      from: "rossstangmod@gmail.com"
+    },
+    // uncomment below to send emails in development/test env:
+    // send: true
+    transport: {
+      jsonTransport: true
+    }
+  });
+
+  email
+    .send({
+      template: "mars",
+      message: {
+        to: "rossstangmod@gmail.com"
+      },
+      locals: {
+        name: "Elon"
+      }
+    })
+    .then(console.log)
+    .catch(console.error);
+}
 
 module.exports = router;
