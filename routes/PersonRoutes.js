@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 
-let Deactivated = false;
+const name = "Ross";
 
 const mongoose = require("mongoose");
 //("mongodb://den1.mongo1.gear.host:27001/pibotdb");
@@ -50,7 +50,7 @@ function sendEmail() {
         to: "rossstangmod@gmail.com"
       },
       locals: {
-        name: "Elon"
+        name: name
       }
     })
     .then(console.log)
@@ -234,6 +234,9 @@ router.put("/IsPresent", function(req, res, next) {
   const query = req.query;
   console.log(query);
 
+  if (query.Name == "Unknown") {
+    sendEmail();
+  }
   const present = { IsPresent: true };
 
   person
