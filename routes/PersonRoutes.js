@@ -2,6 +2,8 @@ const person = require("../Models/Person");
 const activated = require("../Models/Activated");
 const express = require("express");
 const router = express.Router();
+const nodemailer = require("nodemailer");
+
 let Deactivated = false;
 
 const mongoose = require("mongoose");
@@ -24,15 +26,21 @@ const options = {
 function sendEmail() {
   const Email = require("email-templates");
 
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "programmingthingsbot@gmail.com",
+      pass: "Shanesnose"
+    }
+  });
+
   const email = new Email({
     message: {
-      from: "rossstangmod@gmail.com"
+      from: "programmingthingsbot@gmail.com"
     },
     // uncomment below to send emails in development/test env:
-    // send: true
-    transport: {
-      jsonTransport: true
-    }
+    send: true,
+    transport: transporter
   });
 
   email
