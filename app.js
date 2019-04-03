@@ -2,9 +2,9 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var passport = require("passport");
 const mongoose = require("mongoose");
-
+var Strategy = require("passport-facebook").Strategy;
 //("mongodb://den1.mongo1.gear.host:27001/pibotdb");
 
 //"mongodb://pibotdb:password1!@den1.mongo1.gear.host:27001/pibotdb"
@@ -21,6 +21,32 @@ const options = {
   connectTimeoutMS: 4000000
 };
 
+passport.use(
+  new Strategy(
+    {
+      clientID: process.env["FACEBOOK_CLIENT_ID"],
+      clientSecret: process.env["FACEBOOK_CLIENT_SECRET"],
+      callbackURL: "/return"
+    },
+    function(accessToken, refreshToken, profile, cb) {
+      // In this example, the user's Facebook profile is supplied as the user
+      // record.  In a production-quality application, the Facebook profile should
+      // be associated with a user record in the application's database, which
+      // allows for account linking and authentication with other identity
+      // providers.
+      console.log(accessToken);
+      return cb(null, profile);
+    }
+  )
+);
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 // Connect to the db
 /* MongoClient.connect(connstring2, function(err, db) {
   if (err) throw err;
@@ -54,6 +80,7 @@ var updateRouter = require("./routes/update");
 var deleteRouter = require("./routes/delete"); */
 var peopleRouter = require("./routes/PersonRoutes");
 var activatedRouter = require("./routes/ActivatedRoutes");
+var fbRouter = require("./routes/MessengerRoutes");
 var app = express();
 console.log();
 // app.options("/*", (req, res, next) => {
@@ -81,7 +108,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use("/fb", fbRouter);
 /* app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/add", addRouter);
