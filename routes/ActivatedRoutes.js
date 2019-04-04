@@ -2,6 +2,8 @@ const person = require("../Models/Person");
 const activated = require("../Models/Activated");
 const express = require("express");
 const router = express.Router();
+var verifyLoggedIn = require("./VerifyToken");
+
 let Deactivated = false;
 
 const mongoose = require("mongoose");
@@ -33,7 +35,7 @@ mongoose.connect(connstring, options, (err, database) => {
   else console.log("connected to mongo successfully");
 });
 const InitialData = { isActivated: true };
-router.post("/Init", function(req, res, next) {
+router.post("/Init", verifyLoggedIn, function(req, res, next) {
   console.log(InitialData);
   activated
     .create(InitialData)

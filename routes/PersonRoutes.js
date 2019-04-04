@@ -8,6 +8,8 @@ const shell = require("shelljs");
 var jwt = require('jsonwebtoken');
 var config = require('../config/enviromentVariables');
 
+var verifyLoggedIn = require("./VerifyToken");
+
 const name = "Ross";
 
 const mongoose = require("mongoose");
@@ -102,7 +104,7 @@ const InitialData = [
   }
 ];
 //Store the initial 5 people in the room
-router.post("/Init", function(req, res, next) {
+router.post("/Init", verifyLoggedIn, function(req, res, next) {
   console.log(InitialData);
   person
     .create(InitialData)
@@ -122,7 +124,7 @@ router.post("/Init", function(req, res, next) {
 });
 
 //CRUD Create
-router.post("/Create", function(req, res, next) {
+router.post("/Create", verifyLoggedIn, function(req, res, next) {
   person
     .create(req.body)
     .then(user => {
@@ -140,7 +142,7 @@ router.post("/Create", function(req, res, next) {
 });
 
 //CRUD Read
-router.get("/View", function(req, res, next) {
+router.get("/View", verifyLoggedIn, function(req, res, next) {
   const query = req.query;
   person
     .find(query)
@@ -159,7 +161,7 @@ router.get("/View", function(req, res, next) {
 });
 
 //CRUD Update
-router.put("/Update", function(req, res, next) {
+router.put("/Update", verifyLoggedIn, function(req, res, next) {
   const query = req.query;
   console.log(query);
   person
@@ -180,7 +182,7 @@ router.put("/Update", function(req, res, next) {
 });
 
 //CRUD Delete
-router.delete("/Delete", function(req, res, next) {
+router.delete("/Delete", verifyLoggedIn, function(req, res, next) {
   const query = req.query;
   console.log(query);
   person
@@ -200,7 +202,7 @@ router.delete("/Delete", function(req, res, next) {
 });
 
 //Endpoint to get all present people and return an error if deactivated
-router.get("/Present", function(req, res, next) {
+router.get("/Present", verifyLoggedIn, function(req, res, next) {
   getactivated().then(result => {
     console.log(result);
     console.log(result[0].isActivated);
@@ -236,7 +238,7 @@ router.get("/Present", function(req, res, next) {
 });
 
 //register someone as present
-router.put("/IsPresent", function(req, res, next) {
+router.put("/IsPresent", verifyLoggedIn, function(req, res, next) {
   const query = req.query;
   console.log(query);
 
@@ -266,7 +268,7 @@ router.put("/IsPresent", function(req, res, next) {
 });
 
 //register someone has left the room
-router.put("/HasLeft", function(req, res, next) {
+router.put("/HasLeft", verifyLoggedIn, function(req, res, next) {
   const query = req.query;
   console.log(query);
 
@@ -289,7 +291,7 @@ router.put("/HasLeft", function(req, res, next) {
 });
 
 //Endpoint to disable deactivated mode
-router.put("/Activate", function(req, res, next) {
+router.put("/Activate", verifyLoggedIn, function(req, res, next) {
   activated
     .findOneAndUpdate("", { isActivated: true })
     .then(resp => {
@@ -307,7 +309,7 @@ router.put("/Activate", function(req, res, next) {
 });
 
 //Endpoint to enable deactivated mode
-router.put("/Deactivate", function(req, res, next) {
+router.put("/Deactivate", verifyLoggedIn, function(req, res, next) {
   activated
     .findOneAndUpdate("", { isActivated: false })
     .then(
@@ -325,7 +327,7 @@ router.put("/Deactivate", function(req, res, next) {
 });
 
 //endpoint to get whether or not the room function is active
-router.get("/isActivated", function(req, res, next) {
+router.get("/isActivated", verifyLoggedIn, function(req, res, next) {
   getactivated()
     .then(result => {
       console.log(result);
@@ -355,7 +357,7 @@ router.get("/isActivated", function(req, res, next) {
 });
 
 //endpoint to show current video frame
-router.put("/setFrame", function(req, res, next) {
+router.put("/setFrame", verifyLoggedIn, function(req, res, next) {
   let base64string = req.body.baseString;
 
   var options = { upsert: true, new: true, setDefaultsOnInsert: true };
@@ -376,7 +378,7 @@ router.put("/setFrame", function(req, res, next) {
     });
 });
 
-router.get("/getFrame", function(req, res, next) {
+router.get("/getFrame", verifyLoggedIn, function(req, res, next) {
   frame.findOne({}, (err, result) => {
     getactivated()
       .then(activate => {
