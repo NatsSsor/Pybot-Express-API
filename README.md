@@ -5,12 +5,12 @@ This is the PyBot Server API.
 
 It uses Express to create a server on the 8080 port.
 
-#Setup
+## Setup
 
 Call "npm install"
 to install on node modules required
 
-#Run
+## Run
 
 Call "npm start" to run the server which will set up, by default, on localhost:8080.
 
