@@ -2,15 +2,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var passport = require("passport");
+var passport = require("passport");//DEPRECATED
 const mongoose = require("mongoose");
-var Strategy = require("passport-facebook").Strategy;
-//("mongodb://den1.mongo1.gear.host:27001/pibotdb");
+var Strategy = require("passport-facebook").Strategy;//DEPRECATED
 
-//"mongodb://pibotdb:password1!@den1.mongo1.gear.host:27001/pibotdb"
-const connstring = "mongodb://den1.mongo1.gear.host:27001/pibotdb";
-const connstring2 =
-  "mongodb://pibotdb:password1!@den1.mongo1.gear.host:27001/pibotdb"; //,{dbname: 'pibotdb'};
+const connstring = "mongodb://den1.mongo1.gear.host:27001/pibotdb";//Gearhost mongo instance connection string
+
 const options = {
   auth: {
     authSource: "pibotdb"
@@ -20,14 +17,8 @@ const options = {
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 5000  
-};
+};//MongoDB connection options, since it wouldnt work with normal username / password connection
 
-// Connect to the db
-/* MongoClient.connect(connstring2, function(err, db) {
-  if (err) throw err;
-
-  //Write databse Insert/Update/Query code here..
-}); */
 
 
 mongoose.connect(connstring, options, (err, database) => {
@@ -37,45 +28,19 @@ mongoose.connect(connstring, options, (err, database) => {
 const connectionstring =
   "mongodb://pibotdb:password1!@den1.mongo1.gear.host:27001/pibotdb";
 
-/* mongoose.connect(connectionstring);
-var connection = mongoose.connection;
-connection.on("error", console.error.bind(console, "connection error:"));
-connection.once("open", function() {
-  //require("./app/routes")(app);
-}); */
-
-//const url = "mongodb://localhost:27017";
-//const dbName = "database";
-//const client = new MongoClient(url);
-
-/* var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var addRouter = require("./routes/add");
-var viewRouter = require("./routes/view");
-var updateRouter = require("./routes/update");
-var deleteRouter = require("./routes/delete"); */
-var peopleRouter = require("./routes/PersonRoutes");
-var activatedRouter = require("./routes/ActivatedRoutes");
-var fbRouter = require("./routes/MessengerRoutes");
+var peopleRouter = require("./routes/PersonRoutes");//handles people entering and exiting the room, as well as email notifications
+var activatedRouter = require("./routes/ActivatedRoutes");//handles the initialisation of the activated collections
+var fbRouter = require("./routes/MessengerRoutes");//DEPRECATED
 var app = express();
 
 console.log();
-// app.options("/*", (req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, Content-Length, X-Requested-With"
-//   );
-//   res.sendStatus(200);
-// });
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, x-access-token, Content-Type, Accept");
   next();
-});
+});//Handles CORS exceptions as we are talking on multiple servers, as well as x-access-token for JWT Tokens
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -83,15 +48,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/fb", fbRouter);
-/* app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/add", addRouter);
-app.use("/view", viewRouter);
-app.use("/update", updateRouter);
-app.use("/delete", deleteRouter); */
 
-app.use("/intheroom", peopleRouter);
-app.use("/activated", activatedRouter);
+app.use("/intheroom", peopleRouter);//accessible route for the peopleRouter
+app.use("/activated", activatedRouter);// accessible route for the activatedRouter
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -100,10 +59,10 @@ app.use(function(req, res, next) {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
-});
+});//More CORS allowances
 
 app.get("/", function(req, res) {
   res.status("200").send("Service is up");
-});
+});//Express can randomly die if this isnt setup when a check is done to /
 
 module.exports = app;

@@ -7,10 +7,8 @@ var verifyLoggedIn = require("./VerifyToken");
 let Deactivated = false;
 
 const mongoose = require("mongoose");
-//("mongodb://den1.mongo1.gear.host:27001/pibotdb");
 
-//"mongodb://pibotdb:password1!@den1.mongo1.gear.host:27001/pibotdb"
-const connstring = "mongodb://den1.mongo1.gear.host:27001/pibotdb";
+const connstring = "mongodb://den1.mongo1.gear.host:27001/pibotdb";//Gearhost mongo instance connection string
 const connstring2 =
   "mongodb://pibotdb:password1!@den1.mongo1.gear.host:27001/pibotdb"; //,{dbname: 'pibotdb'};
 const options = {
@@ -21,19 +19,14 @@ const options = {
   pass: "password1!",
   useNewUrlParser: true,
   connectTimeoutMS: 4000000
-};
-
-// Connect to the db
-/* MongoClient.connect(connstring2, function(err, db) {
-  if (err) throw err;
-
-  //Write databse Insert/Update/Query code here..
-}); */
+};//MongoDB connection options, since it wouldnt work with normal username / password connection
 
 mongoose.connect(connstring, options, (err, database) => {
   if (err) return console.log(err);
   else console.log("connected to mongo successfully");
-});
+});//connection to db
+
+
 const InitialData = { isActivated: true };
 router.post("/Init", verifyLoggedIn, function(req, res, next) {
   console.log(InitialData);
@@ -52,6 +45,6 @@ router.post("/Init", verifyLoggedIn, function(req, res, next) {
         error: err.message
       });
     });
-});
+});//route to initialise the Activates collection
 
 module.exports = router;
